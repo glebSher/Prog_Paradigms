@@ -1,6 +1,4 @@
 class TicTacToe:
-    """Класс для представления игры "Крестики-нолики"""
-
 
     # Инициализация игровой доски и текущего игрока
     def __init__(self) -> None:
@@ -16,29 +14,16 @@ class TicTacToe:
                 print(cell, end=' | ')
             print('\n-------------')
 
+    # Проверка валидности хода и установка символа игрока на доску
     def make_move(self, row: int, col: int) -> bool:
-        """Проверка валидности хода и установка символа игрока на доску.
-        Args:
-        * row: номер строки.
-        * col: номер столбца.
-
-        return:
-        True, если ход выполнен успешно,
-        False в противном случае"""
         if self.board[row][col] == ' ':
             self.board[row][col] = self.current_player
             self.current_player = 'O' if self.current_player == 'X' else 'X'
             return True
         return False
 
+        # Проверка условий победы для заданного игрока
     def check_winner(self, player: str) -> bool:
-        """Проверка условий победы для заданного игрока.
-        Args:
-        * player: символ игрока ('X' или 'O').
-
-        return:
-        True, если игрок победил,
-        False в противном случае"""
         for i in range(3):
             if self.board[i][0] == self.board[i][1] == self.board[i][2] == player or \
                self.board[0][i] == self.board[1][i] == self.board[2][i] == player:
@@ -50,12 +35,9 @@ class TicTacToe:
 
         return False
 
+    # Начало игры. Игроки по очереди делают ходы до достижения условия победы одним из игроков
+    # или объявления ничьи.
     def play(self) -> None:
-        """Начало игры.
-
-        Игроки по очереди делают ходы до достижения условия победы одним из игроков
-        или объявления ничьи.
-        """
         while True:
             self.draw_board()
             print('Ход игрока', self.current_player)
